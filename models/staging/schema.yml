@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned, deduplicated customer dimension. SCD Type 1 — the latest record per customer_id wins."
+    columns:
+      - name: customer_id
+        description: "Primary key of the customer dimension."
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Normalized customer email address."
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Cleaned order lines with computed line totals in cents."
+    columns:
+      - name: order_id
+        description: "Primary key of the orders staging model."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Foreign key to stg_customers."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: product_category
+        description: "Product category of the order line."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Electronics', 'Books', 'Clothing']
