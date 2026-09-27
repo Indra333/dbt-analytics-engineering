@@ -1,0 +1,9 @@
+# Example DuckDB profile — runs fully locally, no warehouse needed.
+# Copy to ~/.dbt/profiles.yml or pass --profiles-dir . when running dbt.
+analytics_engineering:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: dev.duckdb
+      threads: 4
