@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: daily_revenue
+    description: "One row per order date with order counts, total revenue and average order value."
+    columns:
+      - name: order_date
+        description: "Calendar date of the orders."
+        tests:
+          - unique
+          - not_null
+
+  - name: customer_lifetime_value
+    description: "One row per customer with lifetime order and revenue statistics."
+    columns:
+      - name: customer_id
+        description: "Primary key of the customer lifetime value mart."
+        tests:
+          - unique
+          - not_null
