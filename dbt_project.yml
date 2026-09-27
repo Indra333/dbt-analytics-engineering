@@ -1,0 +1,19 @@
+name: 'analytics_engineering'
+version: '1.0.0'
+config-version: 2
+
+profile: 'analytics_engineering'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+models:
+  analytics_engineering:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
